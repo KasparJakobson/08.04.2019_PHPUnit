@@ -50,6 +50,29 @@ class ReceiptTest extends TestCase
         );
     }
 
+    public function testPostTaxTotal()
+    {
+        // Create a mock receipt class
+        $Receipt = $this->getMockBuilder('TDD\Receipt')
+            ->setMethods(['tax', 'total'])
+            ->getMock();
+
+        // Make sure that the total method in mock Receipt will return 10.00
+        $Receipt->method('total')
+            ->will($this->returnValue(10.00));
+
+        // Make sure that the tax method in mock Receipt will return 1.00
+        $Receipt->method('tax')
+            ->will($this->returnValue(1.00));
+
+        // Execute postTaxTotal with random values
+        $result = $Receipt->postTaxTotal([1, 2, 5, 8], 0.20, null);
+        $this->assertEquals(
+            11.00, // Expected value
+            $result // Value returned by postTaxTotal() using mocked values 10.00 and 1.00
+        );
+    }
+
     public function testTax()
     {
         // Set variables that will be given to tax()

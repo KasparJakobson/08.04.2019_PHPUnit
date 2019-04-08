@@ -28,9 +28,24 @@ class ReceiptTest extends TestCase
         // Give the $input variable to the total() method and save the output to a new variable
         $output = $this->Receipt->total($input);
         $this->assertEquals(
-            15, // expected value
-            $output, // value returned by total()
-            'When summing the total should equal 15' // message to return in case of error
+            15, // Expected value
+            $output, // Value returned by total()
+            'When summing the total should equal 15' // Message to return in case of error
+        );
+    }
+
+    public function testTotalAndCoupon()
+    {
+        // Create a variable of an array and the coupon value
+        $input = [0, 2, 5, 8];
+        $coupon = 0.20;
+
+        // Execute total() with the array and the additional value of coupon and save to variable
+        $output = $this->Receipt->total($input, $coupon);
+        $this->assertEquals(
+            12,  // Expected value
+            $output, // Value returned by total()
+            'When summing the total should equal 12' // Message to return in case of error
         );
     }
 
@@ -44,8 +59,8 @@ class ReceiptTest extends TestCase
         $output = $this->Receipt->tax($inputAmount, $taxInput);
         $this->assertEquals(
             1.00, // expected value
-            $output, // value returned by tax()
-            'The tax calculation should equal 1.00' // message to return in case of error
+            $output, // Value returned by tax()
+            'The tax calculation should equal 1.00' // Message to return in case of error
         );
     }
 }

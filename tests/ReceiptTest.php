@@ -22,11 +22,12 @@ class ReceiptTest extends TestCase
 
     public function testTotal()
     {
-        // Create a variable of an array
+        // Create a variable of an array and the dummy coupon value
         $input = [0, 2, 5, 8];
+        $coupon = null;
 
         // Give the $input variable to the total() method and save the output to a new variable
-        $output = $this->Receipt->total($input);
+        $output = $this->Receipt->total($input, $coupon);
         $this->assertEquals(
             15, // Expected value
             $output, // Value returned by total()

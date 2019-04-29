@@ -58,11 +58,15 @@ class ReceiptTest extends TestCase
             ->getMock();
 
         // Make sure that the total method in mock Receipt will return 10.00
-        $Receipt->method('total')
+        $Receipt->expects($this->once())// Total assumes it will be called once
+        ->method('total')
+            ->with($items, $coupon)// Make sure total is called with these values
             ->will($this->returnValue(10.00));
 
         // Make sure that the tax method in mock Receipt will return 1.00
-        $Receipt->method('tax')
+        $Receipt->expects($this->once())// Tax assumes it will be called once
+        ->method('tax')
+            ->with(10.00, $tax)// Make sure tax is called with these values
             ->will($this->returnValue(1.00));
 
         // Execute postTaxTotal with random values
